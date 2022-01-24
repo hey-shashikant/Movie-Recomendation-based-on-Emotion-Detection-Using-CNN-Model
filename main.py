@@ -1,3 +1,4 @@
+from typing import Dict
 from keras.models import load_model
 from time import sleep
 from keras.preprocessing.image import img_to_array
@@ -12,9 +13,10 @@ emotion_labels = ['Angry','Disgust','Fear','Happy','Neutral', 'Sad', 'Surprise']
 
 cap = cv2.VideoCapture(0)
 
-
+Dict = {}
 
 while True:
+    # Dict = {}
     _, frame = cap.read()
     labels = []
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
@@ -34,13 +36,24 @@ while True:
 
             prediction = classifier.predict(roi)[0]
             label=emotion_labels[prediction.argmax()]
+            # Storing the frequency of the emotion detected.
+            if label in Dict:
+                Dict[label] += 1
+            else:
+                Dict[label] = 1
+            # print(label)
             label_position = (x,y)
             cv2.putText(frame,label,label_position,cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),2)
         else:
             cv2.putText(frame,'No Faces',(30,80),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),2)
     cv2.imshow('Emotion Detector',frame)
+    # print(labels)
+    # Printing all the emotions detected and their frequency.
+    # print(Dict)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
+print(Dict)
 
 cap.release()
 cv2.destroyAllWindows()
