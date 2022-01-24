@@ -13,7 +13,7 @@ emotion_labels = ['Angry','Disgust','Fear','Happy','Neutral', 'Sad', 'Surprise']
 
 cap = cv2.VideoCapture(0)
 
-Dict = {}
+# Dict = {}
 
 while True:
     # Dict = {}
@@ -37,10 +37,10 @@ while True:
             prediction = classifier.predict(roi)[0]
             label=emotion_labels[prediction.argmax()]
             # Storing the frequency of the emotion detected.
-            if label in Dict:
-                Dict[label] += 1
-            else:
-                Dict[label] = 1
+            # if label in Dict:
+            #     Dict[label] += 1
+            # else:
+            #     Dict[label] = 1
             # print(label)
             label_position = (x,y)
             cv2.putText(frame,label,label_position,cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),2)
@@ -53,7 +53,7 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-print(Dict)
+# print(Dict)
 
 cap.release()
 cv2.destroyAllWindows()
