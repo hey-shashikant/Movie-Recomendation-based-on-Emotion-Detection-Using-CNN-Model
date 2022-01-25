@@ -68,7 +68,7 @@ def solve():
 # print(Dict)
 
 # Main Function for scraping
-def test(emotion):
+def main(emotion):
   
     # IMDb Url for Drama genre of
     # movie against emotion Sad
@@ -109,7 +109,10 @@ def test(emotion):
     # movie against emotion Surprise
     elif(emotion == "Surprise"):
         urlhere = 'http://www.imdb.com/search/title?genres=film_noir&title_type=feature&sort=moviemeter, asc'
-  
+
+    else:
+        # https://www.imdb.com/search/title/?groups=top_100&sort=user_rating,desc
+        urlhere = 'https://www.imdb.com/search/title/?groups=top_100&sort=user_rating,desc, asc'
     # HTTP request to get the data of
     # the whole page
     response = HTTP.get(urlhere)
@@ -142,10 +145,10 @@ if __name__ == "__main__":
     print("Emotion Name : ",emotion_name) 
 
 
-    a = test(emotion_name)
+    a = main(emotion_name)
     count = 0
   
-    if(emotion == "Disgust" or emotion == "Anger" or emotion=="Surprise"):
+    if(emotion_name == "Disgust" or emotion_name == "Anger" or emotion_name =="Surprise"):
         for i in a:
   
             # Splitting each line of the
