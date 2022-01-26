@@ -183,5 +183,5 @@ if __name__ == "__main__":
 # cv2.destroyAllWindows()
 # print(Dict)
 
-cap.release()
+
 cv2.destroyAllWindows()
