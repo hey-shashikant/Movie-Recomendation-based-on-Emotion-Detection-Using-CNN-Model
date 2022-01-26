@@ -125,6 +125,7 @@ def main(emotion):
     # Extract movie titles from the
     # data using regex
     title = soup.find_all("a", attrs = {"href" : re.compile(r'\/title\/tt+\d*\/')})
+    cap.release()
     return title
   
 
